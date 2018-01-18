@@ -1,0 +1,19 @@
+version: '2'
+
+# Define the services/containers to be run
+services:
+  app: #name of the service
+    build: ./ # specify the directory of the Dockerfile
+    ports:
+      - "3000:3000" #specify ports forwarding
+    links:
+      - mongodatabase # link this service to the database service
+    volumes:
+      - .:/usr/src/app
+    depends_on:
+      - mongodatabase
+  
+  mongodatabase: # name of the service
+    build: ./mongodocker # specify the directory of the Dockerfile
+    ports:
+      - "27017:27017" # specify port forewarding
